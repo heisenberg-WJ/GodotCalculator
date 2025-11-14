@@ -1,6 +1,6 @@
 using Godot;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Calculator
 {
@@ -9,24 +9,28 @@ namespace Calculator
     /// </summary>
     public class CalculateTable
     {
-        public IToken _currentToken;
+        public CalculatorKeyBoard KeyBoard;
+
+        private IToken _currentToken;
 
         public List<IToken> Tokens = [];
-
-        /// <summary>
-        /// Token的数量
-        /// </summary>
-        public int TokenQuantity => GetLengthList(Tokens);
-
-        public List<IToken> Values = [];
+        public List<IToken> Values = [];//似乎没必要搞这两个分列表
         public List<IToken> Operators = [];
+
+
+
+        public Action<string> TableUpdate;
+
+
 
         public CalculateTable()
         {
-            _currentToken = CreateToken<TokenValue>();
- 
-        }
+            KeyBoard = new CalculatorKeyBoard();
 
+            KeyBoard.Init(this);
+            _currentToken = CreateToken<TokenValue>();
+
+        }
 
 
         public void Input(string str, IToken.Type type)
@@ -52,6 +56,9 @@ namespace Calculator
                     break;
             }
 
+            TableUpdate?.Invoke(GetTexts());
+
+            #region MyRegion
             void AddNumber(string str)
             {
                 if (_currentToken is TokenValue)
@@ -79,6 +86,7 @@ namespace Calculator
                     _currentToken.Input(str);
                 }
             }
+            #endregion
         }
 
         public string GetTexts()
@@ -98,14 +106,14 @@ namespace Calculator
             if (!is_empty)
             {
                 //检查是否是最后一个值token
-                if (TokenQuantity == 1)
+                if (Tokens.Count == 1)
                 {
                     _currentToken.Input("0");//就给他强制设置为0
                 }
                 else//否则
                 {
                     RemoveToken(_currentToken);  //删除这个token
-                    _currentToken = Tokens[TokenQuantity - 1];
+                    _currentToken = Tokens[Tokens.Count - 1];
                 }
             }
         }
@@ -166,23 +174,29 @@ namespace Calculator
         }
 
 
-        public int GetLengthList<T>(List<T> values) where T : class
-        {
-            int _length = 0;
-            foreach (T value in values)
-            {
-                _length++;
-            }
-            return _length;
-        }
+
 
         public void Equles()//需要优化
         {
-            double equals = CalculateCore.Equals2(Values, Operators);
+            //将当前等式保存下来，用于历史记录
+            //将当前Token格式转换成计算格式
+            //执行核心方法来计算结果
+            //输出结果
+
+
+
+
+            double equals = CalculateCore.Calculate(Values, Operators);
             var equals_op = CreateToken<TokenOperator>();
             equals_op.Input("=");
             var equals_value = CreateToken<TokenValue>();
             equals_value.Input(equals.ToString());
+        }
+
+        public void SetKeyBoard(CalculatorKeyBoard keyboard)
+        {
+            KeyBoard = keyboard;
+            keyboard.Init(this);
         }
 
     }
@@ -195,10 +209,57 @@ namespace Calculator
     /// </summary>
     public class CalculateCore
     {
-        private List<IToken> Values;
-        private List<IToken> Operators;
+        private List<double> Values;
+        private List<string> Operators;
 
-        public static double Equals2(List<IToken> values, List<IToken> operators)
+        public static double Calculate(List<IToken> values, List<IToken> operators)
+        {
+            //将Token列表转换成数字列表和字符列表。
+            double result = 0;
+
+            foreach (var item in operators)
+            {
+                if (item.Text == "=")
+                {
+                    break;
+                }
+                if (item.Text == "+")
+                {
+                    double rigth = ((TokenValue)values[values.Count - 1]).Value;
+                    values.RemoveAt(values.Count - 1);
+                    double left = ((TokenValue)values[values.Count - 1]).Value;
+                    result = left + rigth;
+                    GD.Print($" {left} + {rigth} = {result}");
+                }
+                if (item.Text == "-")
+                {
+                    double rigth = ((TokenValue)values[values.Count - 1]).Value;
+                    values.RemoveAt(values.Count - 1);
+                    double left = ((TokenValue)values[values.Count - 1]).Value;
+                    result = left - rigth;
+                    GD.Print($" {left} - {rigth} = {result}");
+                }
+                if (item.Text == "*")
+                {
+                    double rigth = ((TokenValue)values[values.Count - 1]).Value;
+                    values.RemoveAt(values.Count - 1);
+                    double left = ((TokenValue)values[values.Count - 1]).Value;
+                    result = left * rigth;
+                    GD.Print($" {left} * {rigth} = {result}");
+                }
+                if (item.Text == "/")
+                {
+                    double rigth = ((TokenValue)values[values.Count - 1]).Value;
+                    values.RemoveAt(values.Count - 1);
+                    double left = ((TokenValue)values[values.Count - 1]).Value;
+                    result = left / rigth;
+                    GD.Print($" {left} / {rigth} = {result}");
+                }
+            }
+            return result;
+        }
+
+        public static double Calculate(List<TokenValue> values, List<TokenOperator> operators)
         {
             //将Token列表转换成数字列表和字符列表。
             double result = 0;
@@ -210,11 +271,16 @@ namespace Calculator
                     double rigth = ((TokenValue)values[values.Count - 1]).Value;
                     values.RemoveAt(values.Count - 1);
                     double left = ((TokenValue)values[values.Count - 1]).Value;
-                    result =  left + rigth;
+                    result = left + rigth;
                     GD.Print($" {left} + {rigth} = {result}");
                 }
             }
-            return result; 
+            return result;
+        }
+
+        public static double Calculate()
+        {
+            return 0;
         }
 
     }

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://blv5xn4l822oj" path="res://Scripts/CalculatorButton.cs" id="1_jxero"]
 [ext_resource type="Script" uid="uid://hgot5c2ciufn" path="res://Scripts/UIManager.cs" id="1_qdvrb"]
 
-[node name="UI" type="Control" node_paths=PackedStringArray("button1", "button2", "buttonPonit", "buttonBackSpace", "buttonSum", "buttonClear", "buttonEquals")]
+[node name="UI" type="Control" node_paths=PackedStringArray("TableText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,94 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qdvrb")
-button1 = NodePath("1")
-button2 = NodePath("2")
-buttonPonit = NodePath("Point")
-buttonBackSpace = NodePath("BackSpace")
-buttonSum = NodePath("+")
-buttonClear = NodePath("Clear")
-buttonEquals = NodePath("=")
-
-[node name="1" type="Button" parent="."]
-layout_mode = 2
-offset_left = 198.0
-offset_top = 534.0
-offset_right = 310.0
-offset_bottom = 611.0
-theme_override_font_sizes/font_size = 50
-text = "1"
-script = ExtResource("1_jxero")
-Input = "1"
-
-[node name="2" type="Button" parent="."]
-layout_mode = 0
-offset_left = 483.0
-offset_top = 522.0
-offset_right = 589.0
-offset_bottom = 615.0
-text = "2"
-script = ExtResource("1_jxero")
-Input = "2"
-
-[node name="BackSpace" type="Button" parent="."]
-layout_mode = 0
-offset_left = 606.0
-offset_top = 258.0
-offset_right = 759.0
-offset_bottom = 377.0
-text = "BackSpace"
-script = ExtResource("1_jxero")
-Input = "BackSpace"
-Type = 2
-
-[node name="Point" type="Button" parent="."]
-layout_mode = 0
-offset_left = 626.0
-offset_top = 513.0
-offset_right = 732.0
-offset_bottom = 606.0
-text = "."
-script = ExtResource("1_jxero")
-Input = "."
-
-[node name="+" type="Button" parent="."]
-layout_mode = 0
-offset_left = 627.0
-offset_top = 382.0
-offset_right = 756.0
-offset_bottom = 493.0
-theme_override_font_sizes/font_size = 50
-text = "+"
-icon_alignment = 1
-script = ExtResource("1_jxero")
-Input = "+"
-Type = 1
-
-[node name="Clear" type="Button" parent="."]
-layout_mode = 0
-offset_left = 831.0
-offset_top = 227.0
-offset_right = 960.0
-offset_bottom = 338.0
-theme_override_font_sizes/font_size = 50
-text = "C"
-icon_alignment = 1
-script = ExtResource("1_jxero")
-Input = "C"
-Type = 3
-
-[node name="=" type="Button" parent="."]
-layout_mode = 0
-offset_left = 799.0
-offset_top = 517.0
-offset_right = 928.0
-offset_bottom = 628.0
-theme_override_font_sizes/font_size = 50
-text = "="
-icon_alignment = 1
-script = ExtResource("1_jxero")
-Input = "="
-Type = 4
+TableText = NodePath("Label")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -108,70 +21,58 @@ offset_right = 558.0
 offset_bottom = 293.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.015625
-anchor_top = 0.462963
-anchor_right = 0.50434
-anchor_bottom = 0.96142
+anchor_left = 0.523437
+anchor_top = 0.0123457
+anchor_right = 1.01215
+anchor_bottom = 0.757716
 grow_vertical = 2
-columns = 3
+columns = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="1" type="Button" parent="GridContainer"]
+[node name="Clear" type="Button" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
-text = "1"
+text = "C"
 script = ExtResource("1_jxero")
-Input = "1"
+ID = 17
+Input = "C"
+Type = 3
 
-[node name="2" type="Button" parent="GridContainer"]
+[node name="BaceSpace" type="Button" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
-text = "2"
+text = "<"
 script = ExtResource("1_jxero")
-Input = "2"
+ID = 16
+Input = "BackSpace"
+Type = 2
 
-[node name="3" type="Button" parent="GridContainer"]
+[node name="none" type="Button" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
-text = "3"
+text = " "
 script = ExtResource("1_jxero")
-Input = "3"
+ID = -175
+Input = "9"
 
-[node name="4" type="Button" parent="GridContainer"]
+[node name="_" type="Button" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
-text = "4"
+text = "/"
 script = ExtResource("1_jxero")
-Input = "4"
-
-[node name="5" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "5"
-script = ExtResource("1_jxero")
-Input = "5"
-
-[node name="6" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "6"
-script = ExtResource("1_jxero")
-Input = "6"
+ID = 14
+Input = "/"
+Type = 1
 
 [node name="7" type="Button" parent="GridContainer"]
 layout_mode = 2
@@ -180,6 +81,7 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
 text = "7"
 script = ExtResource("1_jxero")
+ID = 7
 Input = "7"
 
 [node name="8" type="Button" parent="GridContainer"]
@@ -189,6 +91,7 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
 text = "8"
 script = ExtResource("1_jxero")
+ID = 8
 Input = "8"
 
 [node name="9" type="Button" parent="GridContainer"]
@@ -198,4 +101,135 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
 text = "9"
 script = ExtResource("1_jxero")
+ID = 9
 Input = "9"
+
+[node name="*" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "X"
+script = ExtResource("1_jxero")
+ID = 13
+Input = "*"
+Type = 1
+
+[node name="4" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "4"
+script = ExtResource("1_jxero")
+ID = 4
+Input = "4"
+
+[node name="5" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "5"
+script = ExtResource("1_jxero")
+ID = 5
+Input = "5"
+
+[node name="6" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "6"
+script = ExtResource("1_jxero")
+ID = 6
+Input = "6"
+
+[node name="-" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "-"
+script = ExtResource("1_jxero")
+ID = 12
+Input = "-"
+Type = 1
+
+[node name="1" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "1"
+script = ExtResource("1_jxero")
+ID = 1
+Input = "1"
+
+[node name="2" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "2"
+script = ExtResource("1_jxero")
+ID = 2
+Input = "2"
+
+[node name="3" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "3"
+script = ExtResource("1_jxero")
+ID = 3
+Input = "3"
+
+[node name="+" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "+"
+script = ExtResource("1_jxero")
+ID = 11
+Input = "+"
+Type = 1
+
+[node name="0" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "0"
+script = ExtResource("1_jxero")
+
+[node name="Pint" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "."
+script = ExtResource("1_jxero")
+ID = 10
+Input = "."
+
+[node name="None" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+script = ExtResource("1_jxero")
+ID = -205
+Input = "9"
+
+[node name="=" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "="
+script = ExtResource("1_jxero")
+ID = 15
+Type = 4

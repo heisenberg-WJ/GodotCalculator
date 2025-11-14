@@ -3,15 +3,15 @@
 [ext_resource type="Script" uid="uid://ljlws6h5rpwl" path="res://Scripts/Main.cs" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://5d3d6otkhw7t" path="res://Scenes/ui.tscn" id="2_bo1nx"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("TableText")]
+[node name="Main" type="Node" node_paths=PackedStringArray("LableText")]
 script = ExtResource("1_jjgbg")
-TableText = NodePath("Label")
+LableText = NodePath("Label")
 
 [node name="UI" parent="." node_paths=PackedStringArray("TableText") instance=ExtResource("2_bo1nx")]
 TableText = NodePath("../Label")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 414.0
-offset_top = 114.0
-offset_right = 669.0
-offset_bottom = 180.0
+offset_left = 286.0
+offset_top = 169.0
+offset_right = 541.0
+offset_bottom = 235.0

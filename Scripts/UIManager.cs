@@ -1,5 +1,7 @@
 using Godot;
+using Calculator;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public partial class UIManager : Control
@@ -7,50 +9,42 @@ public partial class UIManager : Control
     //在编辑器中将按钮UI排版好后，创建胶水代码将其与Godot连接起来
     Main _main => GetParent<Main>();
     [Export] Label TableText;
-    [Export] CalculatorButton button1;
-    [Export] CalculatorButton button2;
-    [Export] CalculatorButton buttonPonit;
-    [Export] CalculatorButton buttonBackSpace;
-    [Export] CalculatorButton buttonSum;
-    [Export] CalculatorButton buttonClear;
-    [Export] CalculatorButton buttonEquals;
+ 
 
 
-     private List<Button> _buttons = [];
-
+    private List<Button> _buttons = [];
+    CalculatorKeyBoard _keyBoard => _main.Table.KeyBoard;
     public override void _Ready()
     {
-        button1.OnClicked += _main.Input;
-        button2.OnClicked += _main.Input;
-        buttonPonit.OnClicked += _main.Input;
-        buttonBackSpace.OnClicked += _main.Input;
-        buttonSum.OnClicked += _main.Input;
-        buttonClear.OnClicked += _main.Input;
-        buttonEquals.OnClicked += _main.Input;
 
+        GD.Print(GetChildCount());
+        Init();
     }
 
-    public void Init(Node node)
+    public void Init()
     {
-        //node.AddChild(new CalculatorButton() { Input = "1", Type = Token.Type.Value });
-
-    }
-
-
-}
-
-public class CalculatorKeyBoard
-{
-    //这里生成所有按钮信息后，在Godot中创建按钮UI，并用遍历的方式来将按钮UI与按钮信息对应起来
-    private List<Calculator.Button> _buttons = [];
-
-
-    public CalculatorKeyBoard()
-    {
-        for (int i = 0; i < 10; i++)
+        var _all_buttons = FindChildren("", "Button", true);
+        List<CalculatorButton> _live_buttons = [];
+        foreach (CalculatorButton button in _all_buttons.Cast<CalculatorButton>())
         {
-            _buttons.Add(new Calculator.Button(i.ToString()) { Input = i.ToString()} );
+            if (button.IsVisibleInTree())
+            {
+                _live_buttons.Add(button);
+            }
         }
+
+        foreach (CalculatorButton button in _live_buttons)
+        {
+            bool _is_get = _keyBoard.Keys.TryGetValue(button.ID, out button.Key);
+            if (_is_get)
+                button.Init();
+            GD.Print($" Button :{button.ID},is get key : {_is_get}");
+        }
+
     }
+
+
 }
+
+
 
