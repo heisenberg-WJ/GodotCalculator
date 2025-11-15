@@ -1,8 +1,3 @@
-using Godot;
-using Microsoft.VisualBasic;
-using System;
-
-
 namespace Calculator
 {
     public interface IInit
@@ -100,7 +95,13 @@ namespace Calculator
 
     public class TokenOperator : IToken
     {
+        public enum OperatorType
+        {
+            Add,Sub
+        }
+
         public string Text { get; set; }
+
 
 
         public bool Backspace()

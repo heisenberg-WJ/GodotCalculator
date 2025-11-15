@@ -8,42 +8,51 @@ namespace Calculator
     public class CalculatorKeyBoard
     {
         //这里生成所有按键信息后，在Godot中创建按钮UI与其一一对应。
-        //  public List<CalculatorKey> Keys = [];
 
-        public Dictionary<int, CalculatorKey> Keys = [];
-
-        public CalculatorKeyBoard()
+        public Dictionary<int, Key> Keys = [];
+        private CalculateTable _table;
+        public CalculatorKeyBoard(CalculateTable table)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                string str = i.ToString();
-                Keys.TryAdd(i, new CalculatorKey(i) { Input = str, Type = IToken.Type.Value });
-            }
-            Keys.TryAdd(10, new CalculatorKey(10) { Input = ".", Type = IToken.Type.Value });
-
-            Keys.TryAdd(11, new CalculatorKey(11) { Input = "＋", Type = IToken.Type.Operator });
-            Keys.TryAdd(12, new CalculatorKey(12) { Input = "－", Type = IToken.Type.Operator });
-            Keys.TryAdd(13, new CalculatorKey(13) { Input = "×", Type = IToken.Type.Operator });
-            Keys.TryAdd(14, new CalculatorKey(14) { Input = "÷", Type = IToken.Type.Operator });
-
-            Keys.TryAdd(15, new CalculatorKey(15) { Input = "＝", Type = IToken.Type.Equals });
-            Keys.TryAdd(16, new CalculatorKey(16) { Input = "BackSpace", Type = IToken.Type.BackSpace });
-            Keys.TryAdd(17, new CalculatorKey(17) { Input = "Clear", Type = IToken.Type.Clear });
-
+            _table = table;
         }
 
 
 
         /// <summary>
-        /// 绑定工作台，请在AddKey方法之后执行。
+        /// 本质是TryAdd()
         /// </summary>
-        /// <param name="table"></param>
-        public void Init(CalculateTable table)
+        /// <param name="index"></param>
+        /// <param name="key"></param>
+        public bool TryAdd(int index, Key key)
         {
-            foreach (var key in Keys.Values)
+            bool _added = Keys.TryAdd(index, key);
+            if (_added)
             {
-                key.OnButton += table.Input;
+                key.OnButton += _table.Input;
             }
+            return _added;
         }
+
+        public bool Remove(int index)
+        {
+            bool _geted = Keys.TryGetValue(index, out Key key);
+            if (_geted)
+            {
+                key.OnButton -= _table.Input;
+            }
+            return Keys.Remove(index);
+        }
+
+        public bool Clear()
+        {
+            foreach (Key item in Keys.Values)
+            {
+                item.OnButton -= _table.Input;
+            }
+            Keys.Clear();
+            return Keys.Values.Count == 0;
+        }
+
+
     }
 }

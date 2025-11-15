@@ -7,8 +7,7 @@
 script = ExtResource("1_jjgbg")
 LableText = NodePath("Label")
 
-[node name="UI" parent="." node_paths=PackedStringArray("TableText") instance=ExtResource("2_bo1nx")]
-TableText = NodePath("../Label")
+[node name="UI" parent="." instance=ExtResource("2_bo1nx")]
 
 [node name="Label" type="Label" parent="."]
 offset_left = 286.0
