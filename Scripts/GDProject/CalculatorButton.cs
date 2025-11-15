@@ -7,7 +7,7 @@ public partial class CalculatorButton : Button
     [Export] public string InputText = "";
     [Export] public IToken.Type Type = IToken.Type.Value; 
 
-    public Calculator.Key Key;
+    public CalculatorKey  Key;
 
     public void Init()
     {
@@ -15,7 +15,7 @@ public partial class CalculatorButton : Button
         ButtonUp += Key.Clicked;
     }
 
-    public void Init(Calculator.Key key)
+    public void Init(CalculatorKey key)
     {
         Key = key;
         ButtonUp += Key.Clicked;

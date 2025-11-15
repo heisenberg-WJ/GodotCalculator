@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace Calculator
+namespace Calculator 
 {
     public interface IKey
     {
@@ -14,8 +14,8 @@ namespace Calculator
     /// <summary>
     /// 计算器按键
     /// </summary>
-    public class Key : IKey
-    { 
+    public class CalculatorKey : IKey
+    {
         /// <summary>
         /// 外部通过ID绑定按键
         /// </summary>
@@ -26,7 +26,7 @@ namespace Calculator
 
         public Action<string, IToken.Type> OnButton;
 
-        public Key(int id, string input, IToken.Type type)
+        public CalculatorKey(int id, string input, IToken.Type type)
         {
             Id = id;
             InputText = input;

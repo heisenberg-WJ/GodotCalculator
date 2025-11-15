@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://6lxp00xwt7su"]
 
-[ext_resource type="Script" uid="uid://ljlws6h5rpwl" path="res://Scripts/Main.cs" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://byls83tb6poj8" path="res://Scripts/GDProject/Main.cs" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://5d3d6otkhw7t" path="res://Scenes/ui.tscn" id="2_bo1nx"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("LableText")]
-script = ExtResource("1_jjgbg")
+script = ExtResource("1_bo1nx")
 LableText = NodePath("Label")
 
 [node name="UI" parent="." instance=ExtResource("2_bo1nx")]

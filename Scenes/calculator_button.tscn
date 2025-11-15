@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b410w5qaa7ggs"]
+
+[ext_resource type="Script" uid="uid://chcmk0huf2jd4" path="res://Scripts/GDProject/CalculatorButton.cs" id="1_3jpp7"]
+
+[node name="CalculatorButton" type="Button"]
+custom_minimum_size = Vector2(50, 50)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("1_3jpp7")

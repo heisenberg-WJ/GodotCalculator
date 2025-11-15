@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://5d3d6otkhw7t"]
 
-[ext_resource type="Script" uid="uid://blv5xn4l822oj" path="res://Scripts/CalculatorButton.cs" id="1_jxero"]
-[ext_resource type="Script" uid="uid://hgot5c2ciufn" path="res://Scripts/UIManager.cs" id="1_qdvrb"]
+[ext_resource type="Script" uid="uid://235h7d3ieyuk" path="res://Scripts/GDProject/UIManager.cs" id="1_qdvrb"]
+[ext_resource type="PackedScene" uid="uid://b410w5qaa7ggs" path="res://Scenes/calculator_button.tscn" id="2_qdvrb"]
 
 [node name="UI" type="Control" node_paths=PackedStringArray("LableText")]
 layout_mode = 3
@@ -31,224 +31,98 @@ grow_vertical = 2
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.268229
-anchor_top = 0.217593
+anchor_left = 0.268
+anchor_top = 0.218
 anchor_right = 0.974826
 anchor_bottom = 0.998457
+offset_left = 0.263794
+offset_top = -0.263748
+grow_horizontal = 2
 grow_vertical = 2
 columns = 4
-metadata/_edit_use_anchors_ = true
 
-[node name="Clear" type="Button" parent="GridContainer"]
+[node name="CalculatorButton" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "C"
-script = ExtResource("1_jxero")
-ID = 17
-InputText = "C"
-Type = 3
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+ID = 0
+InputText = "0"
 
-[node name="BaceSpace" type="Button" parent="GridContainer"]
+[node name="CalculatorButton2" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "<"
-script = ExtResource("1_jxero")
-ID = 16
-InputText = "c"
-Type = 2
-
-[node name="none" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = " "
-script = ExtResource("1_jxero")
-ID = -175
-
-[node name="_" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "/"
-script = ExtResource("1_jxero")
-ID = 14
-InputText = "/"
-Type = 1
-
-[node name="7" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "7"
-script = ExtResource("1_jxero")
-ID = 7
-InputText = "7"
-
-[node name="8" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "8"
-script = ExtResource("1_jxero")
-ID = 8
-InputText = "8"
-
-[node name="9" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "9"
-script = ExtResource("1_jxero")
-ID = 9
-InputText = "9"
-
-[node name="*" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "X"
-script = ExtResource("1_jxero")
-ID = 13
-InputText = "*"
-Type = 1
-
-[node name="4" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "4"
-script = ExtResource("1_jxero")
-ID = 4
-InputText = "4"
-
-[node name="5" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "5"
-script = ExtResource("1_jxero")
-ID = 5
-InputText = "5"
-
-[node name="6" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "6"
-script = ExtResource("1_jxero")
-ID = 6
-InputText = "6"
-
-[node name="-" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "-"
-script = ExtResource("1_jxero")
-ID = 12
-InputText = "-"
-Type = 1
-
-[node name="1" type="Button" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
 text = "1"
-script = ExtResource("1_jxero")
 ID = 1
 InputText = "1"
 
-[node name="2" type="Button" parent="GridContainer"]
+[node name="CalculatorButton3" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
 text = "2"
-script = ExtResource("1_jxero")
 ID = 2
 InputText = "2"
 
-[node name="3" type="Button" parent="GridContainer"]
+[node name="CalculatorButton4" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
 text = "3"
-script = ExtResource("1_jxero")
 ID = 3
 InputText = "3"
 
-[node name="+" type="Button" parent="GridContainer"]
+[node name="CalculatorButton5" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "+"
-script = ExtResource("1_jxero")
-ID = 11
-InputText = "+"
-Type = 1
 
-[node name="0" type="Button" parent="GridContainer"]
+[node name="CalculatorButton6" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "0"
-script = ExtResource("1_jxero")
-InputText = "0"
 
-[node name="Pint" type="Button" parent="GridContainer"]
+[node name="CalculatorButton7" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "."
-script = ExtResource("1_jxero")
-ID = 10
-InputText = "."
 
-[node name="None" type="Button" parent="GridContainer"]
+[node name="CalculatorButton8" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-script = ExtResource("1_jxero")
-ID = -205
 
-[node name="=" type="Button" parent="GridContainer"]
+[node name="CalculatorButton9" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "="
-script = ExtResource("1_jxero")
-ID = 15
-Type = 4
 
-[node name="888" type="Button" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 94.0
-offset_bottom = 77.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "888"
-script = ExtResource("1_jxero")
-ID = 139
+[node name="CalculatorButton10" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton11" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton12" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton13" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton14" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton15" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton16" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton17" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton18" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton19" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton20" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton21" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton22" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton23" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="CalculatorButton24" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2

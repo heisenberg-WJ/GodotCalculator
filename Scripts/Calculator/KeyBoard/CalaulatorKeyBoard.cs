@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Calculator
+namespace Calculator 
 {
     /// <summary>
     /// 计算器键盘
@@ -9,7 +9,7 @@ namespace Calculator
     {
         //这里生成所有按键信息后，在Godot中创建按钮UI与其一一对应。
 
-        public Dictionary<int, Key> Keys = [];
+        public Dictionary<int, CalculatorKey> Keys = [];
         private CalculateTable _table;
         public CalculatorKeyBoard(CalculateTable table)
         {
@@ -23,7 +23,7 @@ namespace Calculator
         /// </summary>
         /// <param name="index"></param>
         /// <param name="key"></param>
-        public bool TryAdd(int index, Key key)
+        public bool TryAdd(int index, CalculatorKey key)
         {
             bool _added = Keys.TryAdd(index, key);
             if (_added)
@@ -35,7 +35,7 @@ namespace Calculator
 
         public bool Remove(int index)
         {
-            bool _geted = Keys.TryGetValue(index, out Key key);
+            bool _geted = Keys.TryGetValue(index, out CalculatorKey key);
             if (_geted)
             {
                 key.OnButton -= _table.Input;
@@ -45,7 +45,7 @@ namespace Calculator
 
         public bool Clear()
         {
-            foreach (Key item in Keys.Values)
+            foreach (CalculatorKey item in Keys.Values)
             {
                 item.OnButton -= _table.Input;
             }

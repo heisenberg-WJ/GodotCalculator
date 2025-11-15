@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Calculator
 {
     /// <summary>
-    /// 计算器的工作台(聚合所有组件)
+    /// 计算器的工作台，用于计算
     /// </summary>
     public class CalculateTable
     {
@@ -15,9 +15,19 @@ namespace Calculator
 
         public CalculateTable()
         {
-            _currentToken = CreateToken<TokenValue>(); 
+            _currentToken = CreateToken<TokenValue>();
         }
 
+        //这个功能要分离出去
+        public string GetTexts()
+        {
+            string _all_text = "";
+            foreach (IToken token in Tokens)
+            {
+                _all_text += token.Text;
+            }
+            return _all_text;
+        }
 
         public void Input(string str, IToken.Type type)
         {
@@ -43,7 +53,7 @@ namespace Calculator
             }
 
             OnTableUpdate?.Invoke(GetTexts());
-                
+
             #region SubMethod
             void AddNumber(string str)
             {
@@ -75,16 +85,6 @@ namespace Calculator
             #endregion
         }
 
-        //这个功能要分离出去
-        public string GetTexts()
-        {
-            string _all_text = "";
-            foreach (IToken token in Tokens)
-            {
-                _all_text += token.Text;
-            }
-            return _all_text;
-        }
 
         public void BackSpace()
         {
@@ -111,12 +111,6 @@ namespace Calculator
             _currentToken = CreateToken<TokenValue>();
         }
 
-        private T CreateToken<T>() where T : IToken, new()
-        {
-            var token = new T();
-            Tokens.Add(token);
-            return token;
-        }
 
 
         public void Equles()//需要优化
@@ -129,13 +123,19 @@ namespace Calculator
 
 
 
-           // double equals = CalculateCore.Calculate(Values, Operators);
-           // var equals_op = CreateToken<TokenOperator>();
-           // equals_op.Input("=");
-          //  var equals_value = CreateToken<TokenValue>();
-          //  equals_value.Input(equals.ToString());
+            // double equals = CalculateCore.Calculate(Values, Operators);
+            // var equals_op = CreateToken<TokenOperator>();
+            // equals_op.Input("=");
+            //  var equals_value = CreateToken<TokenValue>();
+            //  equals_value.Input(equals.ToString());
         }
 
+        private T CreateToken<T>() where T : IToken, new()
+        {
+            var token = new T();
+            Tokens.Add(token);
+            return token;
+        }
 
     }
 

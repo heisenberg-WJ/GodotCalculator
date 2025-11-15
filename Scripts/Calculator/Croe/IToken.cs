@@ -1,10 +1,6 @@
 namespace Calculator
 {
-    public interface IInit
-    {
-        void Init();
-    }
-    public interface IToken
+    public interface IToken//这个东西要改，Token是Token，Key是Key
     {
         public enum Type
         {
