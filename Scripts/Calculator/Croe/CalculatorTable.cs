@@ -39,15 +39,6 @@ namespace Calculator
                 case IToken.Type.Operator:
                     AddOperator(str);
                     break;
-                case IToken.Type.BackSpace:
-                    BackSpace();
-                    break;
-                case IToken.Type.Clear:
-                    Clear();
-                    break;
-                case IToken.Type.Equals:
-                    Equles();
-                    break;
                 default:
                     break;
             }
@@ -84,7 +75,6 @@ namespace Calculator
             }
             #endregion
         }
-
 
         public void BackSpace()
         {

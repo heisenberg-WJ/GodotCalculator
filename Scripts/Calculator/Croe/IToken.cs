@@ -4,7 +4,7 @@ namespace Calculator
     {
         public enum Type
         {
-            Value, Operator, BackSpace, Clear, Equals
+            Value, Operator
         }
 
         public string Text { get; set; }

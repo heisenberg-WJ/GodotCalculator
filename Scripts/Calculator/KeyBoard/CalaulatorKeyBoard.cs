@@ -1,34 +1,52 @@
 using System.Collections.Generic;
 
-namespace Calculator 
+namespace Calculator
 {
     /// <summary>
-    /// 计算器键盘
+    /// 计算器的键盘
     /// </summary>
     public class CalculatorKeyBoard
-    {
-        //这里生成所有按键信息后，在Godot中创建按钮UI与其一一对应。
-
-        public Dictionary<int, CalculatorKey> Keys = [];
+    { 
         private CalculateTable _table;
+        private readonly Dictionary<int, CalculatorKey> Keys = [];
         public CalculatorKeyBoard(CalculateTable table)
         {
             _table = table;
         }
 
+        public void KeyInput(string input, IKey.Type keytype)
+        {
+            switch (keytype)
+            {
+                case IKey.Type.None:
+
+                    break;
+                case IKey.Type.Value:
+                    _table.Input(input, IToken.Type.Value);
+                    break;
+                case IKey.Type.Operator:
+                    _table.Input(input, IToken.Type.Operator);
+                    break;
+                case IKey.Type.Command:
+
+                    break;
+                default:
+                    break;
+            }
+        }
 
 
         /// <summary>
-        /// 本质是TryAdd()
+        /// 自动使用key中定义的ID
         /// </summary>
-        /// <param name="index"></param>
         /// <param name="key"></param>
-        public bool TryAdd(int index, CalculatorKey key)
+        /// <returns></returns>
+        public bool TryAdd(CalculatorKey key)
         {
-            bool _added = Keys.TryAdd(index, key);
+            bool _added = Keys.TryAdd(key.ID, key);
             if (_added)
             {
-                key.OnButton += _table.Input;
+                key.OnClicked += KeyInput;
             }
             return _added;
         }
@@ -38,20 +56,38 @@ namespace Calculator
             bool _geted = Keys.TryGetValue(index, out CalculatorKey key);
             if (_geted)
             {
-                key.OnButton -= _table.Input;
+                key.Clear();
             }
             return Keys.Remove(index);
         }
 
+        public bool Remove(CalculatorKey key)
+        {
+            bool _geted = Keys.TryGetValue(key.ID, out CalculatorKey _outkey);
+            if (_geted)
+            {
+                _outkey.Clear();
+            }
+            return Keys.Remove(_outkey.ID);
+        }
+
         public bool Clear()
         {
-            foreach (CalculatorKey item in Keys.Values)
+            foreach (CalculatorKey key in Keys.Values)
             {
-                item.OnButton -= _table.Input;
+                key.Clear();
             }
             Keys.Clear();
             return Keys.Values.Count == 0;
         }
+
+        public CalculatorKey TryGet(int index)
+        {
+            Keys.TryGetValue(index, out CalculatorKey key);
+            return key;
+        }
+
+        public Dictionary<int, CalculatorKey> GetKeys() => Keys;
 
 
     }

@@ -48,81 +48,25 @@ size_flags_vertical = 8
 text = "0"
 ID = 0
 InputText = "0"
+Type = 1
 
 [node name="CalculatorButton2" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "1"
 ID = 1
 InputText = "1"
+Type = 1
 
 [node name="CalculatorButton3" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "2"
 ID = 2
 InputText = "2"
+Type = 1
 
 [node name="CalculatorButton4" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "3"
 ID = 3
 InputText = "3"
-
-[node name="CalculatorButton5" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton6" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton7" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton8" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton9" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton10" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton11" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton12" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton13" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton14" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton15" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton16" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton17" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton18" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton19" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton20" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton21" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton22" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton23" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
-
-[node name="CalculatorButton24" parent="GridContainer" instance=ExtResource("2_qdvrb")]
-layout_mode = 2
+Type = 1

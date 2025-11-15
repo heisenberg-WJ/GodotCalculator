@@ -38,7 +38,7 @@ public partial class UIManager : Control
         foreach (CalculatorButton button in _live_buttons)
         {
             button.Init();
-            bool _added = _keyBoard.TryAdd(button.ID, button.Key);
+            bool _added = _keyBoard.TryAdd(button.Key);
             if (_added)
             {
                 GD.Print($" Button :{button.ID} is added");

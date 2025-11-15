@@ -1,14 +1,15 @@
 using Godot;
 using System;
 
-namespace Calculator 
+namespace Calculator
 {
     public interface IKey
     {
         public enum Type
         {
-            None, Value, Operator, Com
+            None, Value, Operator, Command
         }
+
     }
 
     /// <summary>
@@ -16,26 +17,29 @@ namespace Calculator
     /// </summary>
     public class CalculatorKey : IKey
     {
-        /// <summary>
-        /// 外部通过ID绑定按键
-        /// </summary>
-        public readonly int Id;
+        public readonly int ID;
+        public readonly string InputText;
+        public readonly IKey.Type Type = IKey.Type.Value;
 
-        public string InputText;
-        public IToken.Type Type = IToken.Type.Value;
-
-        public Action<string, IToken.Type> OnButton;
-
-        public CalculatorKey(int id, string input, IToken.Type type)
+        public event Action<string, IKey.Type> OnClicked;
+         
+        public CalculatorKey(int id, string input, IKey.Type type)
         {
-            Id = id;
+            ID = id;
             InputText = input;
             Type = type;
         }
 
         public void Clicked()
         {
-            OnButton?.Invoke(InputText, Type);
+            OnClicked?.Invoke(InputText, Type);
         }
+        public void Clear()
+        {
+            OnClicked = null;
+        }
+
+
+
     }
 }
