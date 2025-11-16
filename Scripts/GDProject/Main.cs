@@ -8,19 +8,25 @@ public partial class Main : Node
  
     public CalculateTable Table;
     public CalculatorKeyBoard KeyBoard;
+    public TokenTextHandle TextHandle;
     public override void _EnterTree()
     {
         Table = new();
         KeyBoard = new(Table);
+        TextHandle = new CalculateTextHandle();
+        TextHandle.InitToTable(Table);
+       
+    }
 
-        LableText.Text = Table.GetTexts();
-        Table.OnTableUpdate += (string text) => LableText.Text = text;
+    public override void _Ready()
+    {
+        Table.Init();
     }
 
     public void Input(string str, IToken.Type type)
     {
-        Table.Input(str, type);
-        LableText.Text = Table.GetTexts();
+      //  Table.Input(str, type);
+       // LableText.Text = Table.GetTexts();
         // GD.Print($"Text:{current.Text}");
         string _values_text = "";
         //foreach (var token in Table.Values)

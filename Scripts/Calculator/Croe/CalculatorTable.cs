@@ -6,27 +6,22 @@ namespace Calculator
     /// <summary>
     /// 计算器的工作台，用于计算
     /// </summary>
-    public class CalculateTable
+    public class CalculateTable//增加状态管理，计算中和计算结束
     {
         private IToken _currentToken;
 
         public List<IToken> Tokens = [];
-        public Action<string> OnTableUpdate;
+
+        public event Action OnTableUpdate;//还没有覆盖完所有场景，如果主动调用BackSpace等方法，不会触发事件
 
         public CalculateTable()
         {
-            _currentToken = CreateToken<TokenValue>();
+           // _currentToken = CreateToken<TokenValue>();
         }
 
-        //这个功能要分离出去
-        public string GetTexts()
+        public void Init()
         {
-            string _all_text = "";
-            foreach (IToken token in Tokens)
-            {
-                _all_text += token.Text;
-            }
-            return _all_text;
+            Input("0", IToken.Type.Value);
         }
 
         public void Input(string str, IToken.Type type)
@@ -43,7 +38,7 @@ namespace Calculator
                     break;
             }
 
-            OnTableUpdate?.Invoke(GetTexts());
+            OnTableUpdate?.Invoke();
 
             #region SubMethod
             void AddNumber(string str)
@@ -100,8 +95,6 @@ namespace Calculator
             Tokens.Clear();
             _currentToken = CreateToken<TokenValue>();
         }
-
-
 
         public void Equles()//需要优化
         {

@@ -17,8 +17,7 @@ public partial class UIManager : Control
     {
         GD.Print(GetChildCount());
 
-        _main.Table.OnTableUpdate += (string text) => LableText.Text = text;
-
+        _main.Table.OnTableUpdate += () => LableText.Text = _main.TextHandle.Text;//订阅事件时不应该直接用lambda表达式，因为每次lambda表达式都是新的实例
         Init();
     }
 

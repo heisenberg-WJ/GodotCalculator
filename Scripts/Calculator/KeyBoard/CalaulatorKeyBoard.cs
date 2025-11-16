@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace Calculator
 {
     /// <summary>
-    /// 计算器的键盘
+    /// 为Gui界面提供绑定锚点
     /// </summary>
     public class CalculatorKeyBoard
     { 
