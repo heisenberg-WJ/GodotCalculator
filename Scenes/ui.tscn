@@ -1,9 +1,9 @@
 [gd_scene load_steps=23 format=3 uid="uid://5d3d6otkhw7t"]
 
-[ext_resource type="Script" uid="uid://235h7d3ieyuk" path="res://Scripts/GDProject/UIManager.cs" id="1_qdvrb"]
+[ext_resource type="Script" uid="uid://0gnkcc4wkpx0" path="res://Scripts/GDProject/UIManager.cs" id="1_qdvrb"]
 [ext_resource type="PackedScene" uid="uid://b410w5qaa7ggs" path="res://Scenes/calculator_button.tscn" id="2_qdvrb"]
-[ext_resource type="Script" uid="uid://ct8osmvj3cmr3" path="res://Scripts/GDProject/Resources/KeyOperatorResource.cs" id="3_nf4gj"]
-[ext_resource type="Script" uid="uid://7ye3hsc8qr5t" path="res://Scripts/GDProject/Resources/KeyValueResource.cs" id="4_2246s"]
+[ext_resource type="Script" uid="uid://dxhu5dci7slsd" path="res://Scripts/GDProject/Resources/KeyOperatorResource.cs" id="3_nf4gj"]
+[ext_resource type="Script" uid="uid://bkvdsdi4yqle1" path="res://Scripts/GDProject/Resources/KeyValueResource.cs" id="4_2246s"]
 [ext_resource type="Script" uid="uid://dyb63tt1mgjfw" path="res://Scripts/GDProject/Resources/KeyCommandResource.cs" id="4_q7pk6"]
 
 [sub_resource type="Resource" id="Resource_2246s"]
