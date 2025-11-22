@@ -1,7 +1,120 @@
-[gd_scene load_steps=3 format=3 uid="uid://5d3d6otkhw7t"]
+[gd_scene load_steps=23 format=3 uid="uid://5d3d6otkhw7t"]
 
 [ext_resource type="Script" uid="uid://235h7d3ieyuk" path="res://Scripts/GDProject/UIManager.cs" id="1_qdvrb"]
 [ext_resource type="PackedScene" uid="uid://b410w5qaa7ggs" path="res://Scenes/calculator_button.tscn" id="2_qdvrb"]
+[ext_resource type="Script" uid="uid://ct8osmvj3cmr3" path="res://Scripts/GDProject/Resources/KeyOperatorResource.cs" id="3_nf4gj"]
+[ext_resource type="Script" uid="uid://7ye3hsc8qr5t" path="res://Scripts/GDProject/Resources/KeyValueResource.cs" id="4_2246s"]
+[ext_resource type="Script" uid="uid://dyb63tt1mgjfw" path="res://Scripts/GDProject/Resources/KeyCommandResource.cs" id="4_q7pk6"]
+
+[sub_resource type="Resource" id="Resource_2246s"]
+script = ExtResource("3_nf4gj")
+OperatorType = 0
+ID = 200
+InputText = "+"
+metadata/_custom_type_script = "uid://ct8osmvj3cmr3"
+
+[sub_resource type="Resource" id="Resource_8fs27"]
+script = ExtResource("3_nf4gj")
+OperatorType = 1
+ID = 201
+InputText = "-"
+metadata/_custom_type_script = "uid://ct8osmvj3cmr3"
+
+[sub_resource type="Resource" id="Resource_whq80"]
+script = ExtResource("3_nf4gj")
+OperatorType = 2
+ID = 202
+InputText = "*"
+metadata/_custom_type_script = "uid://ct8osmvj3cmr3"
+
+[sub_resource type="Resource" id="Resource_kuui0"]
+script = ExtResource("3_nf4gj")
+OperatorType = 3
+ID = 203
+InputText = "/"
+metadata/_custom_type_script = "uid://ct8osmvj3cmr3"
+
+[sub_resource type="Resource" id="Resource_lkjmk"]
+script = ExtResource("4_q7pk6")
+CommandType = 1
+ID = 505
+InputText = ""
+metadata/_custom_type_script = "uid://dyb63tt1mgjfw"
+
+[sub_resource type="Resource" id="Resource_d42i4"]
+script = ExtResource("4_q7pk6")
+CommandType = 2
+ID = 510
+InputText = ""
+metadata/_custom_type_script = "uid://dyb63tt1mgjfw"
+
+[sub_resource type="Resource" id="Resource_fcexb"]
+script = ExtResource("4_q7pk6")
+CommandType = 3
+ID = 551
+InputText = ""
+metadata/_custom_type_script = "uid://dyb63tt1mgjfw"
+
+[sub_resource type="Resource" id="Resource_smy1h"]
+script = ExtResource("4_q7pk6")
+CommandType = 0
+ID = 500
+InputText = ""
+metadata/_custom_type_script = "uid://dyb63tt1mgjfw"
+
+[sub_resource type="Resource" id="Resource_smcll"]
+script = ExtResource("4_2246s")
+ID = 7
+InputText = "7"
+metadata/_custom_type_script = "uid://7ye3hsc8qr5t"
+
+[sub_resource type="Resource" id="Resource_ryf15"]
+script = ExtResource("4_2246s")
+ID = 8
+InputText = "8"
+metadata/_custom_type_script = "uid://7ye3hsc8qr5t"
+
+[sub_resource type="Resource" id="Resource_mmixe"]
+script = ExtResource("4_2246s")
+ID = 9
+InputText = "9"
+metadata/_custom_type_script = "uid://7ye3hsc8qr5t"
+
+[sub_resource type="Resource" id="Resource_nt8jn"]
+script = ExtResource("4_2246s")
+ID = 4
+InputText = "4"
+metadata/_custom_type_script = "uid://7ye3hsc8qr5t"
+
+[sub_resource type="Resource" id="Resource_g0wmg"]
+script = ExtResource("4_2246s")
+ID = 5
+InputText = "5"
+metadata/_custom_type_script = "uid://7ye3hsc8qr5t"
+
+[sub_resource type="Resource" id="Resource_4vbiv"]
+script = ExtResource("4_2246s")
+ID = 6
+InputText = "6"
+metadata/_custom_type_script = "uid://7ye3hsc8qr5t"
+
+[sub_resource type="Resource" id="Resource_q7pk6"]
+script = ExtResource("4_2246s")
+ID = 1
+InputText = "1"
+metadata/_custom_type_script = "uid://7ye3hsc8qr5t"
+
+[sub_resource type="Resource" id="Resource_m78vo"]
+script = ExtResource("4_2246s")
+ID = 2
+InputText = "2"
+metadata/_custom_type_script = "uid://7ye3hsc8qr5t"
+
+[sub_resource type="Resource" id="Resource_3r70p"]
+script = ExtResource("4_2246s")
+ID = 3
+InputText = "3"
+metadata/_custom_type_script = "uid://7ye3hsc8qr5t"
 
 [node name="UI" type="Control" node_paths=PackedStringArray("LableText")]
 layout_mode = 3
@@ -35,38 +148,137 @@ anchor_left = 0.268
 anchor_top = 0.218
 anchor_right = 0.974826
 anchor_bottom = 0.998457
-offset_left = 0.263794
-offset_top = -0.263748
+offset_left = 537.264
+offset_top = 4.73601
+offset_right = 2.00049
+offset_bottom = -48.0001
 grow_horizontal = 2
 grow_vertical = 2
-columns = 4
 
-[node name="CalculatorButton" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+[node name="Add" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-text = "0"
-ID = 0
-InputText = "0"
-Type = 1
+text = "+"
+Type = 2
+KeyResource = SubResource("Resource_2246s")
 
-[node name="CalculatorButton2" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+[node name="Sub" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "-"
+Type = 2
+KeyResource = SubResource("Resource_8fs27")
+
+[node name="Mul" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "*"
+Type = 2
+KeyResource = SubResource("Resource_whq80")
+
+[node name="Div" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "/"
+Type = 2
+KeyResource = SubResource("Resource_kuui0")
+
+[node name="GridContainer2" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.268
+anchor_top = 0.218
+anchor_right = 0.974826
+anchor_bottom = 0.998457
+offset_left = -282.736
+offset_top = -11.264
+offset_right = -818.0
+offset_bottom = -64.0001
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" parent="GridContainer2" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "<"
+Type = 3
+KeyResource = SubResource("Resource_lkjmk")
+
+[node name="Clear" parent="GridContainer2" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "C"
+Type = 3
+KeyResource = SubResource("Resource_d42i4")
+
+[node name="Equal" parent="GridContainer2" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "="
+Type = 3
+KeyResource = SubResource("Resource_fcexb")
+
+[node name="4" parent="GridContainer2" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "."
+Type = 3
+KeyResource = SubResource("Resource_smy1h")
+
+[node name="9KeyBoard" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.280382
+anchor_top = 0.217593
+anchor_right = 0.634549
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="7" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "7"
+Type = 1
+KeyResource = SubResource("Resource_smcll")
+
+[node name="8" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "8"
+Type = 1
+KeyResource = SubResource("Resource_ryf15")
+
+[node name="9" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "9"
+Type = 1
+KeyResource = SubResource("Resource_mmixe")
+
+[node name="4" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "4"
+Type = 1
+KeyResource = SubResource("Resource_nt8jn")
+
+[node name="5" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "5"
+Type = 1
+KeyResource = SubResource("Resource_g0wmg")
+
+[node name="6" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+text = "6"
+Type = 1
+KeyResource = SubResource("Resource_4vbiv")
+
+[node name="1" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "1"
-ID = 1
-InputText = "1"
 Type = 1
+KeyResource = SubResource("Resource_q7pk6")
 
-[node name="CalculatorButton3" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+[node name="2" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "2"
-ID = 2
-InputText = "2"
 Type = 1
+KeyResource = SubResource("Resource_m78vo")
 
-[node name="CalculatorButton4" parent="GridContainer" instance=ExtResource("2_qdvrb")]
+[node name="3" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "3"
-ID = 3
-InputText = "3"
 Type = 1
+KeyResource = SubResource("Resource_3r70p")

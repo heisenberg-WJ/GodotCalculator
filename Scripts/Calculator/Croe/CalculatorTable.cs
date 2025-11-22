@@ -8,116 +8,128 @@ namespace Calculator
     /// </summary>
     public class CalculateTable//增加状态管理，计算中和计算结束
     {
-        private IToken _currentToken;
+        private Token _currentToken;//这个还有一点问题，等后续
+        public Token CurrentToken => _currentToken;
 
-        public List<IToken> Tokens = [];
+        public List<Token> Tokens = [];
 
         public event Action OnTableUpdate;//还没有覆盖完所有场景，如果主动调用BackSpace等方法，不会触发事件
 
         public CalculateTable()
         {
-           // _currentToken = CreateToken<TokenValue>();
+            
         }
 
-        public void Init()
+        public void InputToken(Token token)
         {
-            Input("0", IToken.Type.Value);
-        }
-
-        public void Input(string str, IToken.Type type)
-        {
-            switch (type)
+            //三种情况1输入token 2value 3operator
+            if (token is Token)
             {
-                case IToken.Type.Value:
-                    AddNumber(str);
-                    break;
-                case IToken.Type.Operator:
-                    AddOperator(str);
-                    break;
-                default:
-                    break;
+
+            }
+
+            if (_currentToken is TokenValue)
+            {
+                if (token is TokenValue)
+                {
+                    _currentToken.Input(token.Text);
+                }
+                else
+                {
+                    Tokens.Add(token);
+                    _currentToken = token;
+                }
+
+            }
+            else if (_currentToken is TokenOperator)
+            {
+                if (token is TokenOperator)
+                {
+                    Tokens.Remove(_currentToken);
+                }
+                Tokens.Add(token);
+                _currentToken = token;
+
             }
 
             OnTableUpdate?.Invoke();
+        }
 
-            #region SubMethod
-            void AddNumber(string str)
+        public void InputPint()
+        {
+            if (_currentToken is TokenValue tokenValue)
             {
-                if (_currentToken is TokenValue)
-                {
-                    _currentToken.Input(str);
-                }
-                else
-                {
-                    //创建新的Token
-                    _currentToken = CreateToken<TokenValue>();
-                    _currentToken.Input(str);
-                }
+                tokenValue.InputPint();
             }
-
-            void AddOperator(string str)
+            else
             {
-                if (_currentToken is TokenOperator)
-                {
-                    _currentToken.Input(str);
-                }
-                else
-                {
-                    //创建新的Token
-                    _currentToken = CreateToken<TokenOperator>();
-                    _currentToken.Input(str);
-                }
+                TokenValue value = new TokenValue(0);
+                value.InputPint();
+                AddToken(value);
             }
-            #endregion
+            OnTableUpdate?.Invoke();
         }
 
         public void BackSpace()
         {
-            bool is_empty = _currentToken.Backspace();
-
-            if (!is_empty)
+            if (_currentToken is TokenValue tokenvalue)//只有value会判断是否为空，并调用他的查空方法。
             {
-                //检查是否是最后一个值token
-                if (Tokens.Count == 1)
-                {
-                    _currentToken.Input("0");//就给他强制设置为0
-                }
-                else//否则
-                {
-                    Tokens.Remove(_currentToken);  //删除这个token
-                    _currentToken = Tokens[Tokens.Count - 1];
-                }
+                tokenvalue.Backspace();
+                if (tokenvalue.IsEmpty())
+                    RemoveToken();
             }
+            else
+            {
+                RemoveToken();
+            }
+            OnTableUpdate?.Invoke();
         }
 
         public void Clear()
         {
             Tokens.Clear();
-            _currentToken = CreateToken<TokenValue>();
+            IfTokensEmpyt();
+            OnTableUpdate?.Invoke();
         }
 
-        public void Equles()//需要优化
+        public void Equal()//需要优化
         {
             //将当前等式保存下来，用于历史记录
             //将当前Token格式转换成计算格式
             //执行核心方法来计算结果
-            //输出结果
-
-
-
-
-            // double equals = CalculateCore.Calculate(Values, Operators);
-            // var equals_op = CreateToken<TokenOperator>();
-            // equals_op.Input("=");
-            //  var equals_value = CreateToken<TokenValue>();
-            //  equals_value.Input(equals.ToString());
+            //输出结果 
+            OnTableUpdate?.Invoke();
         }
 
-        private T CreateToken<T>() where T : IToken, new()
+
+        private void AddToken(Token token)
         {
-            var token = new T();
             Tokens.Add(token);
-            return token;
+            _currentToken = token;
+        }
+
+        /// <summary>
+        /// 移除一个Token,不会导致Tokens列表为空，会始终留有一个Value
+        /// </summary>
+        private void RemoveToken()
+        {
+            Tokens.Remove(_currentToken);
+            IfTokensEmpyt();
+            _currentToken = Tokens[Tokens.Count - 1];
+        }
+
+        private void IfTokensEmpyt()
+        {
+            if (Tokens.Count == 0)
+            {
+                AddToken(new TokenValue(0));
+            }
+        }
+
+        public void Init()
+        {
+            AddToken(new TokenValue(0));
+            OnTableUpdate?.Invoke();
         }
 
     }

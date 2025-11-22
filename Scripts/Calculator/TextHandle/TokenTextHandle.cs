@@ -1,4 +1,5 @@
 using Calculator;
+using Godot;
 using System;
 using System.Collections.Generic;
 
@@ -17,7 +18,7 @@ public abstract class TokenTextHandle : IDisposable//后续需要获得Table的�
             _table.OnTableUpdate -= OnTokensChanged;
     }
 
-    public abstract string GetText(List<IToken> tokens);
+   
     public virtual void InitToTable(CalculateTable table)
     {
         _table = table;
@@ -31,6 +32,7 @@ public abstract class TokenTextHandle : IDisposable//后续需要获得Table的�
     private void OnTokensChanged()
     {
         Text = GetText(_table.Tokens);
+        GD.Print(Text);
     }
-
+    public abstract string GetText(List<Token> tokens);
 }

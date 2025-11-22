@@ -3,25 +3,23 @@ using Godot;
 
 public partial class CalculatorButton : Button
 {
-    [Export] public int ID = -1;
-    [Export] public string InputText = "";
-    [Export] public IKey.Type Type = IKey.Type.Value;
+    [Export] public KeyType Type = KeyType.Value;
     [Export] public KeyResource KeyResource;//不能自动就手动吧
 
 
-    public CalculatorKey Key;
+    public CalKey Key;
 
     public void Init()
     {
         if (Key != null) return;
-         
+
         if (KeyResource != null)
         {
-            Key = KeyResource.GetKey(Type);
+            Key = KeyResource.GetKey();
             ButtonUp += Key.Clicked;
             return;
         }
-        Key = new(ID, InputText, Type);
+        Key = new(KeyResource.ID, KeyResource.InputText);
         ButtonUp += Key.Clicked;
     }
 

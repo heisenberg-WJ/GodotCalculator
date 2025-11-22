@@ -1,39 +1,96 @@
+using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Calculator
 {
+
+
     /// <summary>
     /// 为Gui界面提供绑定锚点
     /// </summary>
-    public class CalculatorKeyBoard
-    { 
+    public class CalculatorKeyBoard//还需要完善
+    {
         private CalculateTable _table;
-        private readonly Dictionary<int, CalculatorKey> Keys = [];
+        private readonly Dictionary<int, CalKey> Keys = [];
         public CalculatorKeyBoard(CalculateTable table)
         {
             _table = table;
         }
 
-        public void KeyInput(string input, IKey.Type keytype)
+        public void KeyInput(KeyType keytype, Token token)
         {
+
             switch (keytype)
             {
-                case IKey.Type.None:
+                case KeyType.Token:
+                    
+                    break;
+
+                case KeyType.Value:
+                    _table.InputToken(token);
 
                     break;
-                case IKey.Type.Value:
-                    _table.Input(input, IToken.Type.Value);
-                    break;
-                case IKey.Type.Operator:
-                    _table.Input(input, IToken.Type.Operator);
-                    break;
-                case IKey.Type.Command:
+
+                case KeyType.Operator:
+
+                    _table.InputToken(token);
 
                     break;
-                default:
+
+
+                case KeyType.Command:
+
+                    string str = token.Text;
+                    if (str == "AddPint")
+                    {
+                        _table.InputPint();
+                    }
+                    if (str == "BackSpace")
+                    {
+                        _table.BackSpace();
+                    }
+                    if (str == "Clear")
+                    {
+                        _table.Clear();
+                    }
+                    if (str == "Equal")
+                    {
+                        _table.Equal();
+                    }
+                  
                     break;
+
+
             }
         }
+
+        //public void KeyInput(string input, KeyType keytype)
+        //{
+        //    switch (keytype)
+        //    {
+        //        case KeyType.None:
+        //            break;
+
+        //        case KeyType.Value:
+        //            //  _table.Input(input, IToken.TokenType.Value);
+        //            break;
+
+        //        case KeyType.Operator:
+        //            var op = new TokenOperatorSingle();
+        //            op.Init(DoubleOperatorType.Add);
+        //            //  _table.Input(input, IToken.TokenType.Operator);
+
+        //            break;
+
+
+        //        case KeyType.Command:
+
+        //            break;
+
+
+        //    }
+        //}
 
 
         /// <summary>
@@ -41,7 +98,7 @@ namespace Calculator
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public bool TryAdd(CalculatorKey key)
+        public bool TryAdd(CalKey key)
         {
             bool _added = Keys.TryAdd(key.ID, key);
             if (_added)
@@ -53,7 +110,7 @@ namespace Calculator
 
         public bool Remove(int index)
         {
-            bool _geted = Keys.TryGetValue(index, out CalculatorKey key);
+            bool _geted = Keys.TryGetValue(index, out CalKey key);
             if (_geted)
             {
                 key.Clear();
@@ -61,9 +118,9 @@ namespace Calculator
             return Keys.Remove(index);
         }
 
-        public bool Remove(CalculatorKey key)
+        public bool Remove(CalKey key)
         {
-            bool _geted = Keys.TryGetValue(key.ID, out CalculatorKey _outkey);
+            bool _geted = Keys.TryGetValue(key.ID, out CalKey _outkey);
             if (_geted)
             {
                 _outkey.Clear();
@@ -73,7 +130,7 @@ namespace Calculator
 
         public bool Clear()
         {
-            foreach (CalculatorKey key in Keys.Values)
+            foreach (CalKey key in Keys.Values)
             {
                 key.Clear();
             }
@@ -81,13 +138,13 @@ namespace Calculator
             return Keys.Values.Count == 0;
         }
 
-        public CalculatorKey TryGet(int index)
+        public CalKey TryGet(int index)
         {
-            Keys.TryGetValue(index, out CalculatorKey key);
+            Keys.TryGetValue(index, out CalKey key);
             return key;
         }
 
-        public Dictionary<int, CalculatorKey> GetKeys() => Keys;
+        public Dictionary<int, CalKey> GetKeys() => Keys;
 
 
     }

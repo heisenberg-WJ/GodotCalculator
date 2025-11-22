@@ -1,15 +1,20 @@
 using Calculator;
 using Godot;
 
+
+public interface IKeyCreate
+{
+    CalKey GetKey();
+}
+
 [GlobalClass]
-public partial class KeyResource : Resource
+public partial class KeyResource : Resource, IKeyCreate
 {
     [Export] public int ID = -1;
     [Export] public string InputText;
 
-    public virtual CalculatorKey GetKey(IKey.Type type)
+    public virtual CalKey GetKey()
     {
-        var key = new CalculatorKey(ID, InputText, type);
-        return key;
+        return new CalKey(ID, InputText);
     }
 }
