@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Calculator.Tokens;
 
 namespace Calculator
 {
@@ -98,7 +99,10 @@ namespace Calculator
             //将当前Token格式转换成计算格式
             //执行核心方法来计算结果
             //输出结果 
-            OnTableUpdate?.Invoke();
+
+            CalculateCore.Calculate(Tokens);
+
+           // OnTableUpdate?.Invoke();
         }
 
 
