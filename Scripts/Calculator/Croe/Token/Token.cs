@@ -3,29 +3,28 @@
 
 namespace Calculator.Tokens
 {
-    //考虑如何加入括号
-    public enum TokenType
-    {
-        Value, Operator1, Operator2
-    }
 
     public class Token
     {
-        public TokenType Type;
-
         /// <summary>
         /// 显示的文本
         /// </summary>
         public string Text { get; set; }
 
+        /// <summary>
+        /// 输入字符串
+        /// </summary>
+        /// <param name="input"></param>
         public virtual void Input(string input)
         {
             Text = input;
         }
 
+        /// <summary>
+        /// Text是否为空
+        /// </summary>
+        /// <returns></returns>
         public bool IsEmpty() => string.IsNullOrEmpty(Text);
 
-
-
-    }//一个最Token最基本的功能是存储一个字符串
+    }
 }
