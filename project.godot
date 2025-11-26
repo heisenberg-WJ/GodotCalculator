@@ -15,6 +15,10 @@ run/main_scene="uid://6lxp00xwt7su"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=648
+
 [dotnet]
 
 project/assembly_name="Calculator"

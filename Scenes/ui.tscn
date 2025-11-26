@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://5d3d6otkhw7t"]
+[gd_scene load_steps=24 format=3 uid="uid://5d3d6otkhw7t"]
 
 [ext_resource type="Script" uid="uid://0gnkcc4wkpx0" path="res://Scripts/GDProject/UIManager.cs" id="1_qdvrb"]
 [ext_resource type="PackedScene" uid="uid://b410w5qaa7ggs" path="res://Scenes/calculator_button.tscn" id="2_qdvrb"]
@@ -62,6 +62,12 @@ ID = 500
 InputText = ""
 metadata/_custom_type_script = "uid://dyb63tt1mgjfw"
 
+[sub_resource type="Resource" id="Resource_v4f2e"]
+script = ExtResource("4_2246s")
+ID = 0
+InputText = "0"
+metadata/_custom_type_script = "uid://bkvdsdi4yqle1"
+
 [sub_resource type="Resource" id="Resource_smcll"]
 script = ExtResource("4_2246s")
 ID = 7
@@ -124,22 +130,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qdvrb")
-LableText = NodePath("TextWindon/Label")
+LableText = NodePath("TextWindow/Text")
 
-[node name="TextWindon" type="Panel" parent="."]
+[node name="TextWindow" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = -1
 anchor_right = 1.0
-offset_bottom = 126.0
+anchor_bottom = 0.194444
 grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="TextWindon"]
+[node name="Text" type="Label" parent="TextWindow"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 1
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
@@ -148,35 +159,31 @@ anchor_left = 0.268
 anchor_top = 0.218
 anchor_right = 0.974826
 anchor_bottom = 0.998457
-offset_left = 537.264
-offset_top = 4.73601
-offset_right = 2.00049
-offset_bottom = -48.0001
+offset_left = 369.336
+offset_top = 0.736008
+offset_right = 11.3127
+offset_bottom = -52.0001
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Add" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "+"
-Type = 2
 KeyResource = SubResource("Resource_2246s")
 
 [node name="Sub" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "-"
-Type = 2
 KeyResource = SubResource("Resource_8fs27")
 
 [node name="Mul" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "*"
-Type = 2
 KeyResource = SubResource("Resource_whq80")
 
 [node name="Div" parent="GridContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "/"
-Type = 2
 KeyResource = SubResource("Resource_kuui0")
 
 [node name="GridContainer2" type="GridContainer" parent="."]
@@ -186,44 +193,50 @@ anchor_left = 0.268
 anchor_top = 0.218
 anchor_right = 0.974826
 anchor_bottom = 0.998457
-offset_left = -282.736
-offset_top = -11.264
-offset_right = -818.0
-offset_bottom = -64.0001
+offset_left = -166.664
+offset_top = -2.26399
+offset_right = -524.687
+offset_bottom = -55.0001
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Back" parent="GridContainer2" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "<"
-Type = 3
 KeyResource = SubResource("Resource_lkjmk")
 
 [node name="Clear" parent="GridContainer2" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "C"
-Type = 3
 KeyResource = SubResource("Resource_d42i4")
 
 [node name="Equal" parent="GridContainer2" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "="
-Type = 3
 KeyResource = SubResource("Resource_fcexb")
 
 [node name="4" parent="GridContainer2" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "."
-Type = 3
 KeyResource = SubResource("Resource_smy1h")
 
+[node name="CalculatorButton" parent="." instance=ExtResource("2_qdvrb")]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 503.0
+offset_right = 294.0
+offset_bottom = 603.0
+text = "0"
+KeyResource = SubResource("Resource_v4f2e")
+
 [node name="9KeyBoard" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.280382
-anchor_top = 0.217593
-anchor_right = 0.634549
-anchor_bottom = 0.75
+anchor_left = 0.262346
+anchor_top = 0.262346
+anchor_right = 0.737654
+anchor_bottom = 0.737654
 grow_horizontal = 2
 grow_vertical = 2
 columns = 3
@@ -232,53 +245,44 @@ metadata/_edit_use_anchors_ = true
 [node name="7" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "7"
-Type = 1
 KeyResource = SubResource("Resource_smcll")
 
 [node name="8" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "8"
-Type = 1
 KeyResource = SubResource("Resource_ryf15")
 
 [node name="9" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "9"
-Type = 1
 KeyResource = SubResource("Resource_mmixe")
 
 [node name="4" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "4"
-Type = 1
 KeyResource = SubResource("Resource_nt8jn")
 
 [node name="5" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "5"
-Type = 1
 KeyResource = SubResource("Resource_g0wmg")
 
 [node name="6" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "6"
-Type = 1
 KeyResource = SubResource("Resource_4vbiv")
 
 [node name="1" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "1"
-Type = 1
 KeyResource = SubResource("Resource_q7pk6")
 
 [node name="2" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "2"
-Type = 1
 KeyResource = SubResource("Resource_m78vo")
 
 [node name="3" parent="9KeyBoard" instance=ExtResource("2_qdvrb")]
 layout_mode = 2
 text = "3"
-Type = 1
 KeyResource = SubResource("Resource_3r70p")

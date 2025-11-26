@@ -1,61 +1,65 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using Calculator.Tokens;
 
 namespace Calculator
 {
     /// <summary>
-    /// 计算器的工作台，用于计算
+    /// 计算器的工作台
     /// </summary>
-    public class CalculateTable//增加状态管理，计算中和计算结束
+    public class CalculateTable
     {
-        private Token _currentToken;//这个还有一点问题，等后续
-        public Token CurrentToken => _currentToken;
+        private Token _currentToken;
+        public Token CurrentToken => _currentToken;//对比一下这两种方式，确定一个规范
 
-        public List<Token> Tokens = [];
+        private List<Token> _tokens;
+        public List<Token> GetTokens() => _tokens;//对比一下这两种方式，确定一个规范
 
-        public event Action OnTableUpdate;//还没有覆盖完所有场景，如果主动调用BackSpace等方法，不会触发事件
+        /// <summary>
+        /// 计算器执行操作时的事件(输入)
+        /// </summary>
+        public event Action TableUpdate;
 
-        public CalculateTable()
+        /// <summary>
+        /// 发布事件
+        /// </summary>
+        public void OnUpdateTable() => TableUpdate?.Invoke();
+
+
+        public void Init()
         {
-            
+            _tokens = [];
+            Input(new TokenValue(0));
+
         }
 
-        public void InputToken(Token token)
+        //==========================================================
+
+
+        public void Input(Token token)
         {
-            //三种情况1输入token 2value 3operator
-            if (token is Token)
+            if (_currentToken is TokenValue && token is TokenValue)
             {
-
+                _currentToken.Input(token.Text);
+            }
+            else if (_currentToken is TokenOperator && token is TokenOperator)
+            {
+                RemoveToken();
+                AddToken(token);
+            }
+            else
+            {
+                AddToken(token);
             }
 
-            if (_currentToken is TokenValue)
-            {
-                if (token is TokenValue)
-                {
-                    _currentToken.Input(token.Text);
-                }
-                else
-                {
-                    Tokens.Add(token);
-                    _currentToken = token;
-                }
 
-            }
-            else if (_currentToken is TokenOperator)
-            {
-                if (token is TokenOperator)
-                {
-                    Tokens.Remove(_currentToken);
-                }
-                Tokens.Add(token);
-                _currentToken = token;
-
-            }
-
-            OnTableUpdate?.Invoke();
+            OnUpdateTable();
         }
 
+        /// <summary>
+        /// 增加小数点
+        /// </summary>
         public void InputPint()
         {
             if (_currentToken is TokenValue tokenValue)
@@ -66,11 +70,13 @@ namespace Calculator
             {
                 TokenValue value = new TokenValue(0);
                 value.InputPint();
-                AddToken(value);
+                Input(value);
             }
-            OnTableUpdate?.Invoke();
         }
 
+        /// <summary>
+        /// 退格
+        /// </summary>
         public void BackSpace()
         {
             if (_currentToken is TokenValue tokenvalue)//只有value会判断是否为空，并调用他的查空方法。
@@ -83,16 +89,22 @@ namespace Calculator
             {
                 RemoveToken();
             }
-            OnTableUpdate?.Invoke();
+
         }
 
+        /// <summary>
+        /// 清空算式
+        /// </summary>
         public void Clear()
         {
-            Tokens.Clear();
-            IfTokensEmpyt();
-            OnTableUpdate?.Invoke();
+            _tokens.Clear();
+            KeepTokensNotEmpty();
+
         }
 
+        /// <summary>
+        /// 等于,计算算式
+        /// </summary>
         public void Equal()//需要优化
         {
             //将当前等式保存下来，用于历史记录
@@ -100,15 +112,40 @@ namespace Calculator
             //执行核心方法来计算结果
             //输出结果 
 
-            CalculateCore.Calculate(Tokens);
+            CalculateCore.Calculate(_tokens);
 
-           // OnTableUpdate?.Invoke();
+
         }
 
+        public void Command(CommandEnum command)
+        {
+            switch (command)
+            {
+                case CommandEnum.Pint:
+                    InputPint();
+                    break;
+                case CommandEnum.BackSpace:
+                    BackSpace();
+                    break;
+                case CommandEnum.Clear:
+                    Clear();
+                    break;
+                case CommandEnum.Equal:
+                    Equal();
+                    break;
+            }
+            OnUpdateTable();
+        }
 
+        //==========================================================
+
+        /// <summary>
+        /// 添加一个Token，并自动更新为_currentToken
+        /// </summary>
+        /// <param name="token"></param>
         private void AddToken(Token token)
         {
-            Tokens.Add(token);
+            _tokens.Add(token);
             _currentToken = token;
         }
 
@@ -117,25 +154,23 @@ namespace Calculator
         /// </summary>
         private void RemoveToken()
         {
-            Tokens.Remove(_currentToken);
-            IfTokensEmpyt();
-            _currentToken = Tokens[Tokens.Count - 1];
+            _tokens.Remove(_currentToken);
+            KeepTokensNotEmpty();
+            _currentToken = _tokens[_tokens.Count - 1];
         }
 
-        private void IfTokensEmpyt()
+        /// <summary>
+        /// 保持Token列表不为空
+        /// </summary>
+        private void KeepTokensNotEmpty()
         {
-            if (Tokens.Count == 0)
+            if (_tokens.Count == 0)
             {
                 AddToken(new TokenValue(0));
             }
         }
 
-        public void Init()
-        {
-            AddToken(new TokenValue(0));
-            OnTableUpdate?.Invoke();
-        }
-
+        //==========================================================
     }
 
 }

@@ -7,7 +7,7 @@ namespace Calculator.Tokens
     /// <summary>
     /// 操作符优先级
     /// </summary>
-    public static class PriorityLevels
+    public static class PriorityLevel
     {
         public const int Low = 1;    // 例如：+，-
         public const int Medium = 2; // 例如：*，/
@@ -16,11 +16,10 @@ namespace Calculator.Tokens
     }
 
 
-
     /// <summary>
     /// 操作符Token (提供计算功能)
     /// </summary>
-    public abstract class TokenOperator : Token //将计算公式定义在内部，外部传值直接调用方法即可获得结果
+    public abstract class TokenOperator : Token 
     {
         /// <summary>
         /// 优先级 (越大越优先)
@@ -33,9 +32,9 @@ namespace Calculator.Tokens
     /// <summary>
     /// 一元操作符
     /// </summary>
-    public class TokenOperatorSingle : TokenOperator
+    public class TokenOperatorSingle : TokenOperator //将计算公式定义在内部，外部传值直接调用方法即可获得结果
     {
-        public override int Priority => PriorityLevels.High;
+        public override int Priority => PriorityLevel.High;
 
 
         public bool Calculate(double value, out double reults)//未完成
@@ -80,12 +79,12 @@ namespace Calculator.Tokens
             switch (OperatorType)
             {
                 case DoubleOperatorType.Add or DoubleOperatorType.Sub:
-                    return PriorityLevels.Low;
+                    return PriorityLevel.Low;
 
                 case DoubleOperatorType.Mul or DoubleOperatorType.Div:
-                    return PriorityLevels.Medium;
+                    return PriorityLevel.Medium;
                 default:
-                    return PriorityLevels.Default;
+                    return PriorityLevel.Default;
             }
         }
 
@@ -133,6 +132,22 @@ namespace Calculator.Tokens
             if (!_is_valid) reults = 0;
 
             return _is_valid;
+        }
+
+    }
+
+
+
+    public enum ParenthType { Left, Right }
+    public class TokenParenth : TokenOperator
+    {
+        public override int Priority => 0;
+
+        public readonly ParenthType Type;
+
+        public TokenParenth(ParenthType parenthtype)
+        {
+            Type = parenthtype;
         }
 
     }

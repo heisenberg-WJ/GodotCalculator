@@ -3,11 +3,10 @@
 [ext_resource type="Script" uid="uid://c22c64mxht5t0" path="res://Scripts/GDProject/CalculatorButton.cs" id="1_3jpp7"]
 
 [node name="CalculatorButton" type="Button"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(100, 100)
 offset_right = 8.0
 offset_bottom = 8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
 script = ExtResource("1_3jpp7")
-Type = 0

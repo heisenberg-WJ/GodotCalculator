@@ -1,10 +1,7 @@
-
-
-
-namespace Calculator.Tokens
+ namespace Calculator.Tokens
 {
 
-    public class Token
+    public abstract class Token
     {
         /// <summary>
         /// 显示的文本
@@ -27,4 +24,7 @@ namespace Calculator.Tokens
         public bool IsEmpty() => string.IsNullOrEmpty(Text);
 
     }
+
+
+
 }
